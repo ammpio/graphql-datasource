@@ -2249,13 +2249,7 @@ var DataSource = function (_super) {
       throw 'resultsData was null or undefined';
     }
 
-    var data = dataPath.split('.').reduce(function (d, p) {
-      if (!d) {
-        return null;
-      }
-
-      return d[p];
-    }, resultsData.data);
+    var data = lodash__WEBPACK_IMPORTED_MODULE_5___default.a.get(resultsData.data, dataPath);
 
     if (!data) {
       var errors = resultsData.errors;
