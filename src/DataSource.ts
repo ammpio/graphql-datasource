@@ -93,7 +93,12 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     if (!resultsData) {
       throw 'resultsData was null or undefined';
     }
-    let data = _.get(resultsData.data, dataPath);
+    let data = dataPath.split('.').reduce((d: any, p: any) => {
+      if (!d) {
+        return null;
+      }
+      return d[p];
+    }, resultsData.data);
     if (!data) {
       const errors: any[] = resultsData.errors;
       if (errors && errors.length !== 0) {
